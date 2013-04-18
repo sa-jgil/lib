@@ -1,0 +1,1711 @@
+﻿***jquery desde google sino se carga carga el local
+
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="./scripts/jquery.min.js"><'+'/script>')</script>
+
+
+***<!-- Soporte para placeholder -->
+	<script src="./scripts/jquery.placeholder.js" type="text/javascript"></script>
+
+***<!-- resize font -->
+    <link href="./scripts/jfontsize/jfontsize.css" rel="stylesheet" type="text/css">
+    <script src="./scripts/jfontsize/jquery.jfontsize-1.0.js" type="text/javascript"></script>
+
+	$('.contenidos').jfontsize({
+		btnMinusClasseId: '#jfontsize-m2',
+		btnDefaultClasseId: '#jfontsize-d2',
+		btnPlusClasseId: '#jfontsize-p2',
+		btnMinusMaxHits: 1,
+		btnPlusMaxHits: 5,
+		sizeChange: 1
+	});
+
+
+***<marquee behavior="scroll" direction="left"  scrollamount="5"></marquee>	
+	/*===== marquee  */
+	$.ajax({
+		contentType: "charset=utf-8",
+		url: './src/marquee.html',
+		success: function(data) {
+			$('marquee').html(data);
+		}
+	});
+	
+	/*===== fin marquee  */
+
+***<!-- Fancybox -->
+	<script type="text/javascript" src="./scripts/fancybox/jquery.fancybox.js"></script>
+	<link rel="stylesheet" type="text/css" href="./scripts/fancybox/jquery.fancybox.css" media="screen" />    
+
+
+	$('.fancybox').fancybox(); //normal
+
+	$(".fancybox_iframe").fancybox({ //con iframe para paginas videos etc
+		 'autoScale' : true,
+		 'transitionIn' : 'none',
+		 'transitionOut' : 'none',
+		 'type' : 'iframe'
+	 });
+	
+***Agregar pagina a marcadores	
+
+	var base = document.domain+'/bancaribe/';
+	
+	function agregar_a_marcadores(){
+		var titulo=String(document.title);
+		var url=String(window.location);
+		
+		if (window.sidebar) // firefox
+		{
+			window.sidebar.addPanel(titulo, url, "");
+		}else 
+		if(window.opera && window.print)
+		{ // opera
+			var elem = document.createElement('a');
+			elem.setAttribute('href',href);
+			elem.setAttribute('title',titulo);
+			elem.setAttribute('rel','sidebar');
+			elem.click();
+		} 
+		else 
+		if(document.all)// ie
+		{
+			window.external.AddFavorite(url, titulo);
+		}else {// otros web Browsers
+			alert ("Presione Crtl+D para agregar a este sitio en sus Favoritos");  
+		}
+	}
+
+	$(function() {
+		$('.al_rgt div.fav').click(function(){agregar_a_marcadores();});
+		});
+		
+		
+***cargar html dentro de un contenedor, remover y agregar clases, modificar un atributo
+	/*========zona interativa - centro de ayuda - centro de contacto bancaribe======*/
+	$('.centro_contacto').click(function()
+	{
+		$.ajax({
+			contentType: "charset=utf-8",
+			url: './zona_interactiva/centro_de_ayuda/centro_contacto_bancaribe.html',
+			success: function(data) {
+				$('.contenidos').html(data);
+				$('.sidebar_internas ul li').removeClass('activa');
+				$('.sidebar_internas ul li.centro_contacto').addClass('activa');
+				$('.sidebar_internas ul li.volver a').attr('href','./zona_interactiva/centro_de_ayuda/formular_queja_reclamos_o_sugerencia/index.html');
+			}
+		});
+	});	
+
+***evento hover con mouseover(primera function) y mouseout(segunda function)
+	$(".banner-link, .prev, .next").hover(
+	function() {
+		$(".banner-link, .prev, .next").stop(true);
+		$(".prev, .next").show();
+	},
+	function() {
+		$(".banner-link, .prev, .next").stop(true);
+		$(".prev, .next").hide();
+	});
+
+***verifica si es mobile y te redirecciona a mio.html esto va en un script.js externo. si alguna pagina llega con el parametro ?nm=1 omite la validacion
+
+var rmio = 'mio.html';
+
+(function(a,b){var regex=new RegExp("[\\?]nm=([^&#]*)");if(regex.exec(String(window.location.href))==null&&/android.+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|meego.+mobile|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(di|rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))){window.location=b}
+else{
+	$(function() {
+	    $("a").each(function(){
+			$(this).attr('href',$(this).attr('href')+'?nm=1');
+		});
+	});
+	}
+})(navigator.userAgent||navigator.vendor||window.opera,rmio);
+
+***<!-- JCarousel Herramientas -->
+    <script type="text/javascript" src="./scripts/jcarousel/jquery.jcarousel.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./scripts/jcarousel/skin_jcarousel.css" />
+	<script type="text/javascript">
+		$(function(){
+			<!-- Carousel herramientas -->
+			$('#mycarousel').jcarousel({
+				scroll: 1,
+				wrap: 'circular'
+			});
+			<!-- Fin Carousel herramientas -->
+		});
+	</script>
+	
+***banner animado
+    <!-- Anything Slider optional plugins -->
+    <script src="scripts/anythingslider/jquery.easing.1.2.js"></script>
+
+    <!-- Anything Slider -->
+    <link href="scripts/anythingslider//anythingslider.css" rel="stylesheet">
+    <script src="scripts/anythingslider/jquery.anythingslider.min.js"></script>
+
+    <!-- Anything Slider optional FX extension -->
+    <script src="scripts/anythingslider/jquery.anythingslider.fx.min.js"></script>
+
+	<script type="text/javascript">
+
+		$(function(){
+			<!-- Banner -->
+			$('#banner')
+				.anythingSlider({
+				autoPlay		: true,
+				resizeContents	: true,
+				buildArrows		: false,
+				buildNavigation	: true,
+				buildStartStop	: false,
+				hashTags		: false,
+				delay			: 10000,
+				onInitialized: function(e, slider) {
+					$('.prev, .next').click(function(){
+							if ($(this).is('.prev')) {
+								slider.goBack();
+							} else {
+								slider.goForward();
+							}
+						});
+				},
+				onSlideBegin : function(event, slider){
+				  $(".banner-link").attr('href',($(slider.$targetPage).find(".bn_img_general").attr("data-url")));
+				  $("#externalNav a").removeClass("nav-selected");
+				  $($("#externalNav a")[slider.currentPage-1]).addClass("nav-selected");
+			 	},
+				onSlideComplete : function(slider){
+				  $("#externalNav a").removeClass("nav-selected");
+				  $($("#externalNav a")[slider.currentPage-1]).addClass("nav-selected");
+				}
+			})
+			.anythingSliderFx({
+				'.textSlide img'	: [ 'fade' ],
+				'.textSlide li'		: [ 'listLR' ]
+			},{
+				timeIn		: 1000,
+				timeOut		: 1000
+			});
+
+			$('#externalNav a').click(function(){
+				var slide = $(this).attr('href').substring(1);
+				$('#banner').anythingSlider(slide);
+				return false;
+			});
+			
+			$(".banner-link, .prev, .next").hover( //mostrar iconos de desplazamiento al hacer hover
+			function() {
+				$(".banner-link, .prev, .next").stop(true);
+				$(".prev, .next").show();
+			},
+			function() {
+				$(".banner-link, .prev, .next").stop(true);
+				$(".prev, .next").hide();
+			});
+			
+
+			<!-- Fin Banner -->
+		});
+	</script>
+	
+***verificar si vengo del mismo dominio. util como para mostrar publicidad en el home y si vuelves al home desde una pagina interna no la muestre
+		$(function(){
+			if ( document.referrer == null || document.referrer.indexOf(window.location.hostname) < 0 ) {
+				tal cosa
+			}
+		});
+		
+***un fancybox con imagenes aleatorias
+	var img = ['./images/pop/pop1.jpg','./images/pop/pop2.jpg'];
+	setTimeout(function(){
+		$.fancybox.open(img[Math.round(Math.random())],{
+			padding: 0,
+
+			openEffect : 'elastic',
+			openSpeed  : 150,
+
+			closeEffect : 'elastic',
+			closeSpeed  : 150,
+
+			closeClick : true,
+			arrows : false,
+
+			helpers:  {
+				title:  null
+			}
+		});
+	},1000);
+	
+***tweeter en mi web como y donde quiera sin plugin adicionales
+	<script type="text/javascript">
+		$(window).load(function(){
+			var twitterUser = "bancaribe"; //usuario twitter
+			var tweets = 1000; //cantidad de tweets
+			$.getJSON("http://twitter.com/status/user_timeline/"+twitterUser+".json?count=" + (tweets) +"&callback=?",function(json){
+				html = "<ul>";
+				var urlregex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+				var userregex = /(\@([-A-Z0-9+&\/%?=~_|!:,.;]*))/gi;
+				var hashtagregex = /(\#([-A-Z0-9+&\/%?=~_|!:,.;]*))/gi;
+				var count = 0;
+				for (i=0;i<json.length;i++)
+				{
+					if (json[i].in_reply_to_screen_name==null)
+					{
+						html += "<li>";
+						html += "<div class='vermas'><a href='http://twitter.com/home?status=RT @"+twitterUser+" "+json[i].text+"' rel='nofollow' target='_Blank'>ReTweet</a>";
+						html += " <a href='http://twitter.com/home?status=@"+twitterUser+" &amp;in_reply_to_status_id=" + json[i].id + "&amp;in_reply_to="+twitterUser+"' rel='nofollow' target='_Blank'>Responder</a></div>";
+						html += "<p>" + json[i].text.replace(urlregex,"<a class='url' href='$1' rel='nofollow'>$1</a>").replace(userregex,"<a class='user' href='http://twitter.com/$2' rel='nofollow'>$1</a>").replace(hashtagregex,"<a class='hashtag' href='http://twitter.com/#search?q=$1' rel='nofollow'>$1</a>") + "</p>";
+						html += "<div class='sep_noti'></div>";
+						html += "</li>";
+						count++;
+					}
+					if (count >= tweets) break;
+				}
+				html += "</ul>";
+				$("#timeline_twitter").html(html);
+			})
+		});
+    </script>
+
+***gestor de feeds/rss en mi web de cualquier blog pasando por api de google
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+    google.load("feeds", "1");
+
+    function initialize() {
+		var feed = new google.feeds.Feed("http://bancaribe.wordpress.com/institucional/feed/");
+		feed.load(function(result) {
+			if (!result.error)
+			{
+				var container = document.getElementById("feed");
+				for (var i = 0; i < result.feed.entries.length; i++)
+				{
+					var entry = result.feed.entries[i];
+					var title = entry.title;
+					var contentSnippet = entry.contentSnippet;
+					var url = entry.link;
+					//console.log(entry);
+					var noticia = '<a href="' + url + '" target="_Blank"><h3 style="text-transform: capitalize;">' + title + '</h3></a><p>' + contentSnippet + '</p><div class="sep_noti"></div>';
+					$('#entradasBlog').append(noticia);
+				}
+			}
+		});
+    }
+    google.setOnLoadCallback(initialize);
+
+    </script>
+
+***un calendario en mi web
+    <!-- datepicker -->
+	<script type="text/javascript" src="./scripts/datepicker/jquery.ui.datepicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="./scripts/datepicker/ui/datepicker.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./scripts/datepicker/ui/jquery.ui.theme.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="./scripts/datepicker/ui/jquery.ui.base.css" media="screen"/>
+    <script type="text/javascript">
+		$(function() {
+			$("#datepicker").datepicker();
+		});
+	</script> 
+
+***redes sociales en mi web compartir fuente: http://addthis.com/
+	<!-- AddThis Button BEGIN -->
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-501feb511d3bbc09"></script>                        
+	<script type="text/javascript">
+		var addthis_config = {
+			ui_click: false /* normally would disable mouseover behavior */
+		}
+	</script>
+	<div class="addthis_toolbox addthis_default_style">
+		<a class="addthis_button_facebook" style="cursor:pointer"></a>
+		<a class="addthis_button_twitter" style="cursor:pointer"></a>
+		<a class="addthis_button_email" style="cursor:pointer"></a>
+		<a class="addthis_button_print" style="cursor:pointer"></a>
+		<div class="box">
+			<a class="jfontsize-button" id="jfontsize-m2" href="#">A-</a>
+			<a class="jfontsize-button" id="jfontsize-d2" href="#">A</a>
+			<a class="jfontsize-button" id="jfontsize-p2" href="#">A+</a>  
+		</div>
+	</div>
+	<!-- AddThis Button END -->
+
+***capturar parametros de url (get) con javascript
+	var regexS = "[\\?&]nm=([^&#]*)"; //nm es la variable get
+	var regex = new RegExp ( regexS );
+	var tmpURL = window.location.href;
+	var results = regex.exec( tmpURL );
+	if( results == null )
+		console.log(results);
+	else
+		console.log(results);
+
+//otra forma
+	function gup( name ){
+		var regexS = "[\\?&]"+name+"=([^&#]*)";
+		var regex = new RegExp ( regexS );
+		var tmpURL = window.location.href;
+		var results = regex.exec( tmpURL );
+		if( results == null )
+			return"";
+		else
+			return results[1];
+	}
+	para usarla dentro del ready 
+		gup('variable');
+		
+***agregar una base a un html
+<base href="http://localhost/talcosa">
+<!--[if lte IE 6]></base><![endif]--> //y esto en caso de usar ie6
+
+
+***modificar atributos con jquery
+	$('a').attr('href') --> devuelve valor
+	$('a').attr('href','nueva') --> cambia valor
+	$('a').removeAttr('href') --> quitar atributo
+	
+	
+***reemplazar cadenas de caracteres con javascript
+var str="hola mundo";
+var n = str.replace("mundo","y chao"); 
+
+***jquery preventdefault --> evita que se cumpla su accion, es aplicable en botones, a, etc
+	<script>
+	$("a").click(function(event) {
+	  event.preventDefault();
+	});
+	</script>
+
+***calendario con dias bloqueados para tomar citas x ejemplo o agregar feriados nacionales
+*** fuente http://davidwalsh.name/jquery-datepicker-disable-days
+    <!-- datepicker -->
+	<script type="text/javascript" src="./scripts/datepicker/jquery.ui.datepicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="./scripts/datepicker/ui/datepicker.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./scripts/datepicker/ui/jquery.ui.theme.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="./scripts/datepicker/ui/jquery.ui.base.css" media="screen"/>
+    <script type="text/javascript">
+		var bancarios = ["8-13-2012","11-5-2012"];
+		var feriadosNacionales = ["10-12-2012","12-25-2012"];
+		
+		/* utility functions */
+		function fn_bancarios(date) {
+			var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+			for (i = 0; i < bancarios.length; i++) {
+				if($.inArray((m+1) + '-' + d + '-' + y,bancarios) != -1) {
+					return [false,'bancario']; //clase para dias bancarios
+				}
+			}
+			for (i = 0; i < feriadosNacionales.length; i++) {
+				if($.inArray((m+1) + '-' + d + '-' + y,feriadosNacionales) != -1) {
+					return [false,'feriadosNacionales']; //clase para dias feriadosNacionales
+				}
+			}			
+			return [true];
+		}
+		function noWeekendsOrHolidays(date) {
+			var noWeekend = jQuery.datepicker.noWeekends(date);
+			return noWeekend[0] ? fn_bancarios(date) : noWeekend;
+		}
+		
+		/* create datepicker */
+		$(function() {
+			$('#datepicker').datepicker({
+				dateFormat: 'DD, MM, d, yy',
+				constrainInput: true,
+				beforeShowDay: noWeekendsOrHolidays,
+				onSelect: function(date) { //por problemas con base en ie
+					$("#datepicker a").click(function(event) {
+						event.preventDefault();
+					});
+				},
+				onChangeMonthYear: function(date) { //por problemas con base en ie
+					$("#datepicker a").click(function(event) {
+						event.preventDefault();
+					});
+				}
+			});
+			
+			$("#datepicker a").click(function(event) {
+				event.preventDefault();
+			});						
+			
+		});
+		
+		
+	</script> 
+	
+	
+***calculadora util
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Banco de Venezuela / Grupo Santander</title>
+<script language="javascript">
+var letra;
+var unicode;
+var resetear = false;
+var enter = false;
+
+function detectkeys(e){
+	if (!e) var e = window.event;
+	unicode = e.keyCode ? e.keyCode : e.charCode;
+	
+	letra = String.fromCharCode(unicode);
+	
+	switch(letra){
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			down(document.getElementById(letra),letra);
+			resetear = true;
+			break;
+		case '/':
+			down(document.getElementById('div'),letra);
+			letra = 'div';
+			resetear = true;
+			break;
+		case '*':
+			down(document.getElementById('mu'),letra);
+			letra = 'mu';
+			resetear = true;
+			break;
+		case '-':
+			down(document.getElementById('re'),letra);
+			letra = 're';
+			resetear = true;
+			break;
+		case '+':
+			down(document.getElementById('su'),letra);
+			letra = 'su';
+			resetear = true;
+			break;
+		default:
+			if(unicode==13){
+				down(document.getElementById('igual'),"=");
+			}	
+			break;
+	}
+}
+
+function resetkeys(){
+	if(resetear){
+		document.getElementById(letra).className='calcu_celda';
+		resetear = false;
+	}else{
+		document.getElementById('igual').className='calcu_celda';
+	}
+}
+					var total_lcd;
+					var FKeyPad = document.Keypad;
+					var Accum = 0;
+					var FlagNewNum = false;
+					var PendingOp = "";
+					
+					function NumPressed (Num) {
+						if (FlagNewNum) {
+							document.getElementById("lcd").value = Num;
+							FlagNewNum = false;
+						}
+						else {
+							if (document.getElementById("lcd").value == "0")
+								document.getElementById("lcd").value = Num;
+							else
+								document.getElementById("lcd").value += Num;
+						}
+					}
+					
+					function Operation (Op) {
+						var LCD = document.getElementById("lcd").value;
+						if (FlagNewNum && PendingOp != "=");
+						else{
+							FlagNewNum = true;
+							if ( '+' == PendingOp )
+								Accum += parseFloat(LCD);
+							else if ( '-' == PendingOp )
+								Accum -= parseFloat(LCD);
+							else if ( '/' == PendingOp )
+								Accum /= parseFloat(LCD);
+							else if ( '*' == PendingOp )
+								Accum *= parseFloat(LCD);
+							else
+								Accum = parseFloat(LCD);
+								document.getElementById("lcd").value = Accum;
+								PendingOp = Op;
+						}
+					}
+					
+					function Decimal () {
+						var curLCD = document.getElementById("lcd").value;
+						if (FlagNewNum) {
+							curLCD = "0.";
+							FlagNewNum = false;
+						} else {
+							if (curLCD.indexOf(".") == -1)
+							curLCD += ".";
+						}
+						document.getElementById("lcd").value = curLCD;
+					}
+					
+					function raiz() {
+						document.getElementById("lcd").value = Math.sqrt(document.getElementById("lcd").value);
+					}
+					
+					function ClearEntry () {
+						document.getElementById("lcd").value = "0";
+						FlagNewNum = true;
+					}
+					
+					function Clear () {
+						Accum = 0;
+						PendingOp = "";
+						ClearEntry();
+					}
+					
+					function Neg () {
+						document.getElementById("lcd").value = parseFloat(document.getElementById("lcd").value) * -1;
+					}
+					
+					function Inv() {
+						document.getElementById("lcd").value = 1/document.getElementById("lcd").value;
+					}
+					
+					function Percent () {
+						document.getElementById("lcd").value = (parseFloat(document.getElementById("lcd").value) / 100) * parseFloat(Accum);
+					}
+					
+										
+					function down(celda,caracter){
+						
+						celda.className = 'calcu_celda_down';
+						
+						switch(caracter){
+							case "/":
+							case "*":
+							case "-":
+							case "+":
+							case "=":
+								Operation(caracter);
+								break;
+							case "%":
+								Percent();
+								break;
+							case ",":
+								Decimal();
+								break;
+							case "raiz":
+								raiz();
+								break;
+							case "c":
+								Clear();
+								break;
+							case "ce":
+								ClearEntry();
+								break;
+							case "neg":
+								Neg();
+								break;
+							case "inv":
+								Inv();
+								break;
+							default:
+								NumPressed(caracter);
+								break;
+						}
+					}
+					
+				</script>
+<style type="text/css">
+	/*estilos de la calculadora*/
+.calcu_celda {
+	width: 36px;
+	text-align: center;
+	vertical-align: middle;
+	font-weight:bold;
+	cursor: pointer;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 32px;
+	color: #666666;
+	padding-left: 2px;
+	background-image: url(img_calc_math/bot_normal.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	padding-top: 0px;
+	height: 34px;
+	}
+.calcu_celda_over{
+	background-image: url(img_calc_math/bot_ov.jpg);
+	color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 32px;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	height: 34px;
+	width: 36px;
+	padding-top: 0px;
+	padding-left: 2px;
+}
+.calcu_celda_down{
+	color: #fff;
+	background-image: url(img_calc_math/bot_down.jpg);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 32px;
+	font-weight: bold;
+	text-decoration: none;
+	background-repeat: no-repeat;
+	background-position: center center;
+	text-align: center;
+	vertical-align: middle;
+	height: 34px;
+	width: 36px;
+	padding-top: 0px;
+	padding-left: 2px;
+}
+	
+	.calcu_lcd {
+	height: 20px;
+	width: 185px;
+	text-align: right;
+	font-weight:bold;
+	cursor: default;
+	vertical-align: bottom;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-image: url(img_calc_math/bg_led.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: #CC0000;
+	text-decoration: none;
+	padding-top: 2px;
+	padding-right: 1px;
+	padding-left: 2px;
+	padding-bottom: 0px;
+	}
+	
+ .tabla_calc {
+	background-image: url(img_calc_math/bg.jpg);
+	height: 208px;
+	width: 208px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin-right: auto;
+	margin-left: auto;
+}
+</style>
+</head>
+
+<body>
+<table width="208" height="208" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla_calc">
+  <tr>
+    <td><table width="95%" height="202" border="0" cellpadding="0" cellspacing="0" style="margin-left:3px">
+      <tr>
+        <td align="center"><input maxlength="18" class="calcu_lcd" id="lcd" name="lcd" type="text" value="0" readonly="true" /></td>
+      </tr>
+      <tr>
+        <td align="center"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="32" height="32">&nbsp;</td>
+            <td width="32" height="32">&nbsp;</td>
+            <td width="32" height="32">&nbsp;</td>
+            <td width="32" height="32" class="calcu_celda" id="" onmousedown="javascript:down(this,'c');"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">C</td>
+            <td width="32" height="32" class="calcu_celda" id="" onmousedown="javascript:down(this,'ce');"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">CE</td>
+          </tr>
+          <tr>
+            <td width="32" height="32" class="calcu_celda" id="7" onmousedown="javascript:down(this,7);"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">7</td>
+            <td width="32" height="32" class="calcu_celda" id="8" onmousedown="javascript:down(this,8);"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">8</td>
+            <td width="32" height="32" class="calcu_celda" id="9" onmousedown="javascript:down(this,9);"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">9</td>
+            <td width="32" height="32" class="calcu_celda" id="div" onmousedown="javascript:down(this,'/');"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">/</td>
+            <td width="32" height="32" class="calcu_celda" id="" onmousedown="javascript:down(this,'raiz');"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">sqrt</td>
+          </tr>
+          <tr>
+            <td width="32" height="32" class="calcu_celda" id="4" onmousedown="javascript:down(this,4);"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">4</td>
+            <td width="32" height="32" class="calcu_celda" id="5" onmousedown="javascript:down(this,5);"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">5</td>
+            <td width="32" height="32" class="calcu_celda" id="6" onmousedown="javascript:down(this,6);"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">6</td>
+            <td width="32" height="32" class="calcu_celda" id="mu" onmousedown="javascript:down(this,'*');"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">*</td>
+            <td width="32" height="32" class="calcu_celda" id="" onmousedown="javascript:down(this,'%');"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">%</td>
+          </tr>
+          <tr>
+            <td width="32" height="32" class="calcu_celda" id="1" onmousedown="javascript:down(this,1);" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">1</td>
+            <td width="32" height="32" class="calcu_celda" id="2" onmousedown="javascript:down(this,2);" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">2</td>
+            <td width="32" height="32" class="calcu_celda" id="3" onmousedown="javascript:down(this,3);" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">3</td>
+            <td width="32" height="32" class="calcu_celda" id="re" onmousedown="javascript:down(this,'-');" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">-</td>
+            <td width="32" height="32" class="calcu_celda" id="" onmousedown="javascript:down(this,'inv');" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">1/x</td>
+          </tr>
+          <tr>
+            <td width="32" height="32" class="calcu_celda" id="0" onmousedown="javascript:down(this,0);"  onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">0</td>
+            <td width="32" height="32" class="calcu_celda" id="" onmousedown="javascript:down(this,'neg');" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">+/-</td>
+            <td width="32" height="32" class="calcu_celda" id="co" onmousedown="javascript:down(this,',');" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">,</td>
+            <td width="32" height="32" class="calcu_celda" id="su" onmousedown="javascript:down(this,'+');" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">+</td>
+            <td width="32" height="32" class="calcu_celda" id="igual" onmousedown="javascript:down(this,'=');" onmouseover="javascript:this.className='calcu_celda_over';" onmouseout="javascript:this.className='calcu_celda';">=</td>
+          </tr>
+        </table></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+<script language="javascript">
+document.onkeypress=detectkeys;
+document.onkeyup=resetkeys;
+</script>
+
+
+***excluir selectores con jquery --> fuente: http://api.jquery.com/not-selector/
+	$(function() {
+	    $("a:not(.trigger)").each(function(){
+			$(this).attr('href',$(this).attr('href')+'?nm=1');
+		});
+	});
+
+***hover con jquery
+	$(".banner-link, .prev, .next").hover(
+	function() {
+		$(".banner-link, .prev, .next").stop(true);
+		$(".prev, .next").show();
+	},
+	function() {
+		$(".banner-link, .prev, .next").stop(true);
+		$(".prev, .next").hide();
+	});
+
+***animate con jquery
+	$('#twitter').mousemove(function(){
+			$('.twitter').css('display','block');
+			$('.twitter img').animate({
+				'margin-left':'150px',
+				'margin-top':'-150px'//,
+				},2000,function(){
+					$('.twitter').css('display','none');
+					$('.twitter img').css('margin-left','-100px');
+					$('.twitter img').css('margin-top','100px');
+				}); 
+		}
+	);
+	
+***selector hijo jquery
+$(this).find("img");
+
+***para evitar los stylos por defecto del iphone en apps mobile
+<meta name="format-detection" content="telephone=no">
+<a href="tel:(0414) 266.84.91">(0414) 266.84.91</a>
+.footer2 .direccion a[href^=tel]{
+	color: #fff;
+}
+
+***para evitar que el iphone detecte numeros de telefono
+<meta name="format-detection" content="telephone=no">
+
+***stylos de numeros telefonicos en iphone
+footer .direccion a[href^=tel],
+footer .direccion a[href^=mailto]{
+	color: #fff;
+}
+
+
+***css fuentes externas
+@font-face {
+	font-family: LSANS;
+	src: url(../Fonts/LSANS.TTF);
+}
+
+***formulario para buscar fuente para crear SNIPPETS http://www.htmlquick.com/es/tutorials/forms.html
+	<form id="form_buscar" name="form_buscar" action="" method="post">
+		<input type="text" name="txt_buscar" id="txt_buscar" placeholder="Buscar" />
+		<input type="submit" value="Buscar" />
+	</form>
+
+***agregar guiones automaticos a las palabras q se cortan en parrafos 
+ejem: 
+hola como estas 
+--> hola co-
+mo estas?
+
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+
+***jQuery con efecto toggle y funcion callback
+
+$(".list_categorias").toggle('slider', function(){
+	$(".list_categorias").removeAttr('style');
+	$('.producto_categoria .ver').css('background','url(./images/generales/bt_buscar.png) no-repeat center #fff');
+	});
+
+***Para crear botones de sumar y restar cantidades ejemplo cantidad de productos a solicitar
+		$('.cat_menos').click(function() {
+			if ($("#txt_cantidad").attr('value')!=0)
+			{
+				$("#txt_cantidad").attr('value',$("#txt_cantidad").attr('value')-1);
+			}
+		});
+		$('.cat_mas').click(function() {
+			if ($("#txt_cantidad").attr('value')!="")
+			{
+				$("#txt_cantidad").attr('value',parseInt($("#txt_cantidad").attr('value'))+1);
+			}else
+			{
+				$("#txt_cantidad").attr('value','1');
+			}
+		});
+
+		
+***
+	/*================================ Si es mobile muestra un boton para ver las categorias */
+	$('.producto_categoria .ver').click(function() {
+		if ($(".list_categorias").css('display')=='none')
+		{
+			$(".list_categorias").toggle('slider');
+			$('.producto_categoria .ver').css('background','url(./images/generales/icn_cerrar.png) no-repeat center #fff');
+		}else
+		{
+			$(".list_categorias").toggle('slider', function(){
+				$(".list_categorias").removeAttr('style');
+				$('.producto_categoria .ver').css('background','url(./images/generales/bt_buscar.png) no-repeat center #fff');
+				});
+		}
+		
+	});
+	/*================================ fin Si es mobile muestra un boton para ver las categorias */
+
+***Personalizar un input checkbox (uasado en carrito de protesica)
+--> css
+header .bg_header2 .listadoCarrito input[type="checkbox"] {
+    display: none;
+}
+header .bg_header2 .listadoCarrito input[type="checkbox"] + label {
+    background: url(images/header/check.png) no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    text-indent: -1000em;
+    width: 16px;
+}
+header .bg_header2 .listadoCarrito input[type="checkbox"]:checked + label {
+    background: url(images/header/check.png) no-repeat scroll 0 -16px transparent;
+}
+--> html
+<input id="checkbox1" name="checkbox1" type="checkbox" /><label for="checkbox1"></label>
+
+
+*** Galeria de videos (uasado en galeria de protesica)
+
+--> css
+
+.es-carousel-wrapper img { width: 69px; height: 69px; }
+.es-carousel-wrapper{
+	padding:10px 37px;
+	position:relative;
+	background:#fff;
+}
+.es-carousel{
+	overflow:hidden;
+	background:#fff;
+}
+.es-carousel ul{
+	display:none;
+}
+.es-carousel ul li{
+	height: 71px;
+	width: 71px;
+	float:left;
+	display:block;
+	background:#fff;
+}
+.es-carousel ul li:hover img {
+	border: 1px solid red;
+}
+
+.es-carousel .videoActivo img{
+	border: 1px solid red;
+}
+
+.es-nav span{
+	position:absolute;
+	top:50%;
+	left:12px;
+	background: url(images/generales/galeria_prev.png) no-repeat center; width: 26px; height: 28px;
+	margin-top:-13px;
+	text-indent:-9000px;
+	cursor:pointer;
+	opacity:0.8;
+}
+.es-nav span.es-nav-next{
+	right:12px;
+	left:auto;
+	background: url(images/generales/galeria_next.png) no-repeat center; width: 26px; height: 28px;
+}
+.es-nav span:hover{
+	opacity:1.0;
+}
+
+
+--> html
+
+            <div id="carousel" class="es-carousel-wrapper">
+                <div class="es-carousel">
+                    <ul>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                        <li id_video="RmMxCxlZehg"><img src="http://img.youtube.com/vi/RmMxCxlZehg/0.jpg" alt="foto" /></li>
+                        <li id_video="zR0TF2_eJ7Q"><img src="http://img.youtube.com/vi/zR0TF2_eJ7Q/0.jpg" alt="foto" /></li>
+                    </ul>
+                </div>
+            </div>
+
+
+--> js
+
+<script type="text/javascript" src="scripts/elastislide/jquery.elastislide.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#carousel').elastislide({
+			imageW 	: 69,
+			minItems	: 5
+		});
+		$('#carousel li:first-child').addClass('videoActivo');
+		$('#carousel li').click(function(){
+			var id_video = $(this).attr('id_video');
+			$('.cont_video iframe').attr('src','http://www.youtube.com/embed/'+id_video);
+			$('#carousel li').removeClass('videoActivo');
+			$(this).addClass('videoActivo');
+		});
+	});
+</script>
+
+
+*** Footer siempre abajo
+<script type="text/javascript">
+	var bodyHeight = null;
+	var baseHeight = null;
+	var quienContiene = "#dstoy";
+	function setHeight() {
+		if (bodyHeight == null) {
+			bodyHeight = $('body').height();
+			baseHeight = $(quienContiene).height();
+		}
+		var windowHeight = $(window).height();
+
+		if(bodyHeight < windowHeight) {
+			var diffHeight = windowHeight - bodyHeight;
+
+			$(quienContiene).clearQueue();
+			$(quienContiene).animate({height:baseHeight+diffHeight});
+		}
+	}
+
+	$(document).ready(function() {setHeight();});
+	$(window).resize(function() {setHeight();});
+
+</script>
+
+***twitter con widget en mi web
+<a class="twitter-timeline"  href="https://twitter.com/pradlig" data-widget-id="246692583349305344">Tweets por @pradlig</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+***quitar borde de los input y textarea en chrome (css)
+input, textarea {
+	outline: none;
+}
+
+***selector de input text (css) (jquery)
+input[type="text"] {
+	border: 1px solid red;
+}
+
+***escuchar el scroll de la pagina
+
+	var opacity = 1;
+	$(window).bind('scroll', function() {
+		var scroll_actual = $(this).scrollTop();//valor del scroll actual
+		if(scroll_actual > scroll_inicial){
+			//scroll hacia abajo
+		   if (opacity > 0 )
+		   {opacity = opacity -0.1;}
+		   $('.particulas .segundo_plano div').each(function(){
+				$(this).css('opacity',opacity)
+			});
+		   
+		}else{
+			//scroll hacia arriba
+		   if (opacity <= 1 )
+		   {opacity = opacity +0.1;}
+		   $('.particulas .segundo_plano div').each(function(){
+				$(this).css('opacity',opacity)
+			});							
+		}
+		scroll_inicial = scroll_actual; 
+	});
+	
+***recorrer radios para ver si fueron seleccionados (usado en delaaalzinc.com)
+	$(".participaA").click( function(){
+		var radio = $("div#pag1a input[type='radio']:checked").length;
+		if(radio != ""){
+			participaB();
+		}
+	});
+
+***ir a la ruta de donde vengo (usado en bancaribe para verificar si abro de nuevo el popup y en ccsdesign para redireccionar
+el Enviar_InfContactoTelef.php)
+window.location.href=document.referrer+'#enviado';
+
+document.referrer --> devuelve de donde vengo
+
+
+***capturar variables de la url con javascript
+	var vr = 'page=0';
+	var src = String( window.location.href ).split('?')[1];	
+	var vrs = src.split('&');
+	console.log(vrs);
+	for(var i in vrs) {
+		if(vr == vrs[i]) {
+			console.log(decodeURI( vrs[i].split('=')[1] ));
+			$("header.main-title").css('z-index','3');
+			break;
+		}
+	}
+
+***texto en vertical con css
+-webkit-transform:rotate(-90deg);
+-moz-transform:rotate(-90deg);
+-o-transform: rotate(-90deg);
+filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
+
+***fancybox
+-- abrir url en iframe
+-- html
+<a href="/demo/iframe.html" data-fancybox-type="iframe" class="various">Iframe</a>
+
+-- javascript
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+***scroll en los divs
+
+-- html
+<div class="scroll">
+	<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+	<div class="viewport">
+		<div class="overview">
+			
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+			
+		</div>
+	</div>
+</div>                    
+
+--css
+.listadoCarrito .scroll { width: 82%; height: 222px; display: block; clear: both;}
+.listadoCarrito .scroll .viewport { width: 97%; height: 200px; overflow: hidden; position: relative; }
+.listadoCarrito .scroll .overview { list-style: none; position: absolute; width: 100%;}
+.listadoCarrito .scroll .thumb .end,
+.listadoCarrito .scroll .thumb { background-color: #005DA4; }
+.listadoCarrito .scroll .scrollbar { position: relative; float: right; width: 15px; }
+.listadoCarrito .scroll .track { background-color: #D8EEFD; height: 100%; width:13px; position: relative; padding: 0 1px; }
+.listadoCarrito .scroll .thumb { height: 20px; width: 13px; cursor: pointer; overflow: hidden; position: absolute; top: 0; }
+.listadoCarrito .scroll .thumb .end { overflow: hidden; height: 5px; width: 13px; }
+.listadoCarrito .scroll .disable{ display: none; }
+.noSelect { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
+
+
+--javascript
+<!-- Soporte para Tiny Scrollbar -->
+<script src="./scripts/tinyscrollbar/jquery.tinyscrollbar.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		var oScroll1 = $('.listadoCarrito .scroll');
+		if(oScroll1.length > 0){
+			oScroll1.tinyscrollbar();
+		}	
+		
+	});
+	
+</script>
+
+
+*** para las url de youtube
+<?   
+
+function youtube($url) {
+  echo"<pre>";     
+	var_dump ($tube = parse_url($url));
+        if ($tube["path"] == "/watch") {
+					
+					
+					echo"<br>";
+					
+      
+			parse_str($tube["query"],$query);
+					
+           $id = $query['v'];
+					 
+					 echo"<br>";
+					 
+				echo "<pre>";
+				var_dump($id);
+				
+        } else {
+            $id = "";   
+        }
+        return $id;
+    }
+
+
+$super="http://www.youtube.com/watch?v=kxTAjVGN4CE&feature=g-all-xit";
+
+	 youtube($super);
+
+//$hola="como estas";
+echo mb_strlen($hola)
+
+	
+	 ?>
+	 
+	 
+*** obtener parametros de una url 
+
+/*jgil*/
+
+var src = String( window.location.href ).split('?')[1];	
+var varias = -1;
+varias = src.lastIndexOf('&'); //-1 si no esta
+if (varias > 0)
+{
+	var vrs = src.split('&');
+	for(var i in vrs) {
+		//console.log(vrs[i].lastIndexOf('box='));
+		if(vrs[i].lastIndexOf('box=') == 0)
+		{
+			//console.log(decodeURI( vrs[i].split('=')[1] ));
+			var box = '#'+decodeURI( vrs[i].split('=')[1] );
+			//console.log(box);
+			abrir(box);
+			break;
+		}
+	}
+}
+/*fin jgil*/
+
+
+***Verifica variable definida en javascript
+	if(typeof(src) != "undefined")
+	{
+		//definida
+	}
+
+***para publicar en wp
+
+[sourcecode language='html']
+
+[/sourcecode]
+
+[sourcecode language='css']
+
+[/sourcecode]
+
+[sourcecode language='javascript']
+
+[/sourcecode]
+
+[sourcecode language='php']
+
+[/sourcecode]
+
+*** recorrer un arreglo con jQuery
+$.each(myArray, function(i,valor)
+{
+	console.log(i+" -> " +valor); 
+});
+
+*** Arrays asociativos en javascript
+var x = new Array();
+x['key'] = "value";
+for (i in x)
+{
+    if (i == 'key')
+    {
+        alert ("existe en "+i);
+    }
+}
+
+*** Arrays asociativos en javascript
+[sourcecode language='javascript']
+	var arr = new Array();
+	arr['cap1i'] = [
+		'info/capitulo1/i/2_opt.jpeg',
+		'info/capitulo1/i/3-1_opt.jpeg',
+		'info/capitulo1/i/4-1_opt.jpeg',
+		'info/capitulo1/i/47-1_opt.jpeg',
+		'info/capitulo1/i/5-1_opt.jpeg',
+		'info/capitulo1/i/6-1_opt.jpeg',
+		'info/capitulo1/i/7-1_opt.jpeg',
+		'info/capitulo1/i/78-1_opt.jpeg',
+		'info/capitulo1/i/8-1_opt.jpeg',
+		'info/capitulo1/i/9-1_opt.jpeg',
+		'info/capitulo1/i/principal.jpg',
+		'info/capitulo1/i/principal_small.jpg'
+	];
+
+	// Si existe cap1i dentro de my array 'arr'
+	for (i in arr)
+	{
+		if (i == 'cap1i')
+		{
+			$(contenedor).prepend('<div id=galeria>');
+			
+			$.each(arr['cap1i'], function(i,img)
+			{
+				//console.log(i+" -> " +img); 
+				$(contenedor +" #galeria").prepend('<a href="'+img+'" class="fancybox" rel="gal"><img src="'+img+'" alt="" /></a>');
+			});
+			$(contenedor).prepend('</div>');
+		}
+	}
+[/sourcecode]
+
+*** uso de hash
+[sourcecode language='javascript']
+
+	var hash = window.location.hash;
+
+	if(hash == '#uno')
+	{
+		alert('uno');
+	}else
+	if(hash == '#dos')
+	{
+		alert('dos');
+	}
+[/sourcecode]
+
+
+*** JavaScript replace() Method
+[sourcecode language='javascript']
+
+	var str="cadena larga";
+	var nstr=str.replace("larga","corta");
+	console.log(nstr); //--> cadena corta
+	
+[/sourcecode]
+
+*** uso de timthumb.php para crear thumb de imagenes
+fuente: http://www.binarymoon.co.uk/2012/02/complete-timthumb-parameters-guide/
+
+
+*** editor de texto
+http://nightly-v4.ckeditor.com/3559/samples/inlineall.html
+
+*** quitar eventos en jquery
+$('#foo').unbind('click');
+
+***jquery preventdefault --> evita que se cumpla la accion del a con href = #
+	<script>
+	$("a[href$='#']").click(function(event) {
+	  event.preventDefault();
+	});
+	</script>
+
+*** anclas animadas fuente: http://www.ibonlopez.com/2011/10/anclas-deslizantes-con-scroll-de-pagina-usando-jquery/
+<script type="text/javascript" src="./scripts/jquery.min.js"></script>
+<script language="javascript">
+      $(function(){
+           $('a[href*=#]').click(function() {
+ 
+           if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                   var $target = $(this.hash);
+                   $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
+                   if ($target.length) {
+                       var targetOffset = $target.offset().top;
+                       $('html,body').animate({scrollTop: targetOffset}, 1000);
+                       return false;
+                  }
+             }
+         });
+      });
+ </script>
+ 
+ <a href="#salto">SALTAR A UN PUNTO DE LA PÁGINA PERO LENTAMENTE</a>
+<a name="salto"></a>
+
+*** selector de hijos en jquery  fuente: http://api.jquery.com/first-child-selector/
+	:nth-child(hijoNumero)
+
+	$("div span:nth-child(1)").text();
+
+	
+*** escuchar el resize y ejecutar luego de finalizar ese evento aplicable a dispositivos mibiles
+	$(window).resize(function() {
+		if(this.resizeTO) clearTimeout(this.resizeTO);
+		this.resizeTO = setTimeout(function() {
+			$(this).trigger('resizeEnd');
+		}, 500);
+	});
+	
+	$(window).bind('resizeEnd', function() {
+		if(window.innerWidth > 1000 )
+		{
+			var altura = $('.pagina .centro .contenido').css('height');
+			$(' .pagina .iz .centro, .pagina .dr .centro ').css('height',altura)
+		}
+	});
+
+*** jQuery
+	$("#midiv > div").length; //--> Cantidad de hijos
+
+	$("tr:odd").addClass("odd"); //--> Aplicar un “efecto cebra” en las tablas 
+
+	$('link[media='screen']').attr('href', 'otroestilo.css'); //--> Cambiar hoja de estilos con jQuery
+	
+	//--> Comprobar si existe un elemento
+	if ($('img').length) {
+		log('Si hay imagenes');
+	} else {
+		log('No hay imagenes');
+	}
+	
+	$("div").siblings() //--> Obtener los hermanos de un elemento
+	
+*** setInterval //--> Funcion ciclica de javascript
+
+setInterval("funcion()",1000);
+	
+*** css Ajustar los parrafos justificados para que la ultima linea quede del tamaño de todo el parrafo
+.contenedorTxt p.break {
+	text-align: justify;
+	text-align-last: justify;
+}
+
+.contenedorTxt p.break:after {
+	content: "";
+	display: inline-block;
+	width: 100%;
+}
+
+fuente: http://kristinlbradley.wordpress.com/2011/09/15/cross-browser-css-justify-last-line-paragraph-text/
+
+
+*** css justificar li para que tengaan el mismo tamaño
+fuente: http://kristinlbradley.wordpress.com/2011/09/15/cross-browser-css-justified-block-list/
+
+*** mostrar imagenes de fondo en un fancybox
+//--> html
+<div class="foto_ini img_cap10ii" data-title="titulo de la foto"></div>
+
+//--> javascript
+
+	$('.foto_ini').click(function(){
+		var bg = $(this).css('background-image');
+		//--> url("http://localhost/bancaribe_libro/bancaribe_libro/info/capitulo10/i/principal.jpg")
+		//--> url(http://localhost/bancaribe_libro/bancaribe_libro/info/capitulo10/i/principal.jpg)
+		bg = bg.replace(/url\(/gi,'');
+		bg = bg.replace(/\)/gi,'');
+		bg = bg.replace(/"/gi,'');
+		var title = $(this).attr('data-title');
+		if(!title)
+		{
+			title = $(this).prev('.view-back').children('.leyenda').html();
+		}
+		$.fancybox({
+				href: bg,
+				title: title
+			});
+	});
+
+*** css hack IE con @media
+/*--> hack solo IE */
+@media \0screen {
+	.contenedorTxt .gradient h1 {
+		width: 100%;
+	}
+}
+/*--> fin hack solo IE */
+
+*** Precargar imagenes con jQuery
+$.preloadImages = function(){
+	for(var i = 0; i<arguments.length; i++)
+	{
+		$("<img>").attr("src", arguments[i]);
+	};
+}
+$.preloadImages("./images/general/bg_iz.png","./images/general/bg_der.png");
+
+
+*** scrollTop //--> para subir al top de la pagina
+$('.home_qs').click(function(){
+    $('html,body').animate({scrollTop:0}, 500);
+})
+
+[sourcecode language='javascript']
+
+	
+	
+[/sourcecode]
+
+
+*** para fancybox
+
+	/*===== fancybox  */
+	$('.fancybox').fancybox({
+		keys : 
+			{
+				next : {
+					35 : 'left', // enter
+					35 : 'up',   // page down
+					35 : 'left', // right arrow
+					35 : 'up'    // down arrow
+				},
+				prev : {
+					36  : 'right',  // backspace
+					36 : 'down',   // page up
+					36 : 'right',  // left arrow
+					36 : 'down'    // up arrow
+				},
+				close  : [27], // escape key
+				play   : [32], // space - start/stop slideshow
+				toggle : [70]  // letter "f" - toggle fullscreen
+			},
+		beforeLoad: function() { //--> para colocar el titulo
+            this.title = $(this.element).find('h3').html();
+        }
+	});
+
+	
+*** clone()
+
+if ($('.det_noti img').length > 0)
+{
+	$($('.det_noti img')[0]).clone().appendTo('.img_noti');
+	$($('.det_noti img')[1]).remove();
+}
+
+*** verifica ancho del explorador
+if((window.innerWidth > 356 )||(document.documentElement.clientWidth > 356))
+
+
+*** funcion recursiva
+function animar(i){
+	$($('.animame > li')[i]).animate(
+		{opacity:1},
+		600,
+		function(){
+			if(i > 9){return false;}
+			i++;
+			animar(i);
+		}
+	);
+}
+anima(0);
+
+
+
+***
+	<!-- Para paginas con version movil -->
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+***
+
+
+*** Para icono de marcadores en ios
+	<link rel="apple-touch-icon" href="demos/images/apple-touch-icon.png">
+	
+	//--> imagen png de 256x256
+***	
+
+
+*** fotograms css
+
+.facebook:hover > .like{
+	animation: move 2s infinite;
+}
+
+/*ANIMACION CSS3*/
+
+@-moz-keyframes move{
+
+	0% {
+		-moz-transform:rotate(20deg);
+		-webkit-transform:rotate(20deg);
+		-ms-transform:rotate(20deg);
+		-o-transform:rotate(20deg);
+	}
+	
+	100% {
+		-moz-transform:rotate(-20deg);
+		-webkit-transform:rotate(-20deg);
+		-ms-transform:rotate(-20deg);
+		-o-transform:rotate(-20deg);
+	}
+}
+
+*** subir pagina
+onClick="window.scroll(0,0)"
+
+ejemplo
+<a onClick="window.scroll(0,0)">subir</a>
+
+*** 
+
+
+/******* Select con estilos propios ****/
+
+
+
+/* The CSS */
+select {
+	padding:3px 5px;
+	margin: 0;
+	background: #2f2f2f;
+	border:none;
+	outline:none;				
+	display: inline-block;
+	
+	width: 100%;
+	/*max-width: 288px;*/
+	max-width: 305px;
+	height: 38px;
+	border: 1px solid #fff;
+	box-shadow: inset 5px -5px 5px 3px #090909, 0 0 3px 2px #d6e6a6;
+	
+	color:#7a7a7a;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	cursor:pointer;
+	
+	font-family: Dosis, Verdana;
+	font-size: 18px;
+	line-height: 38px;
+}
+label {
+	position:relative;		
+}
+label:after {
+	content:'< >';
+	font-size: 18px;
+	line-height: 14px;
+	color: #fff;
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-ms-transform:rotate(90deg);
+	transform:rotate(90deg);
+	
+	width: 20px;
+	height: 18px;
+	right: 2px; 
+	top: -7px;
+	padding: 8px;
+	
+	background: #2f2f2f;
+	position:absolute;
+	pointer-events:none;
+	
+}
+label:before {
+	content:'';
+	right:6px; top:0px;
+	width:20px; height:20px;
+	background:#f8f8f8;
+	position:absolute;
+	pointer-events:none;
+	display:block;
+}
+<label>
+	<select>
+		<option value="De 1 a 5 secciones" selected>De 1 a 5 secciones </option>
+		<option value="De 5 a 10 secciones">De 5 a 10 secciones </option>
+		<option value="Más  de 10 secciones">Más  de 10 secciones</option>
+	</select>
+</label>
+
+
+**** hack para solo ie o para todos menos ie
+
+				<!--[if IE]><![if !IE]><![endif]-->
+					para todos
+				<!--[if IE]><![endif]><![endif]-->
+				<!--[if IE]>
+					solo para ie
+				<![endif]-->
+
+
+**** cola de animaciones en hijos
+	function nextMostrar(element) {
+		element
+			.eq(0)
+			.animate({
+				'opacity':'1',
+				'right': '0'
+			},200,function(){
+					nextMostrar(element.slice(1));
+				});
+	}	
+		nextMostrar($('.botonera_btm .mostrar'));
+		
+		
+**** obtener attr de swf - php
+
+<?php
+list($ancho, $alto, $tipo, $atributos) = getimagesize("http://localhost/laboral/clientes-gestor/directv/inv_tarjeta_de_cumpleanios/multimedia/TarjetaCumpleanios.swf");
+echo $atributos;
+?>
+
+**** Detectar IE7 con javascript
+IE='\v'=='v';
+
+IE --> devuelve true o false
+
+
+**** colocar favicon
+<link rel="icon" type="image/jpg" href="images/logo_footer.jpg" />
+
+****
+
+
