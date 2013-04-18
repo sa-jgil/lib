@@ -1706,6 +1706,7 @@ IE --> devuelve true o false
 **** colocar favicon
 <link rel="icon" type="image/jpg" href="images/logo_footer.jpg" />
 
-****
+**** @media
+@media screen and (min-width: 0) and (max-width: 674px) {}
 
-
+*** 
