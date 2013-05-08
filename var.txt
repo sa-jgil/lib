@@ -354,7 +354,13 @@ else{
 		gup('variable');
 		
 ***agregar una base a un html
-<base href="http://localhost/talcosa">
+
+--> para wordpress
+<base href="<?php bloginfo('template_url') ?>/" target="_blank">
+
+--> para cualquier pagina
+<base href="http://localhost/talcosa/" target="_blank">
+
 <!--[if lte IE 6]></base><![endif]--> //y esto en caso de usar ie6
 
 
@@ -1708,5 +1714,52 @@ IE --> devuelve true o false
 
 **** @media
 @media screen and (min-width: 0) and (max-width: 674px) {}
+
+*** crear scroll vertical con mousemove en un elemento ejemplo en una imagen, una lista etc
+
+	scrollVertical($('.lista'),$('.lista ul'))
+	function scrollVertical($padre,$hijo){
+		$padre.css({
+			overflow: 'hidden'
+		});
+		var extra = 800;
+		var divWidth = $padre.height();
+		$padre.unbind('mousemove').bind('mousemove',function(e){
+			var containerWidth = $hijo.height() + divWidth + 2*extra;
+			var top = (e.pageY - $padre.offset().top) * (containerWidth-divWidth) / divWidth - extra;
+			$padre.animate({scrollTop: top}, 0);
+		});
+	}
+
+	
+	
+	
+*** pendiente 
+var file_size = $('#frmContacto input:file')[0].files[0].size;
+
+file_size = (file_size/1024).toFixed(0);
+
+
+*** detectar el navegador con jQuery --> funcional con jQuery < 1.9
+
+	$(function(){
+		if(typeof($.browser.chrome) != "undefined")
+		{
+			alert('chrome');
+		}else if(typeof($.browser.mozilla) != "undefined")
+		{
+			alert('mozilla');
+		}else if(typeof($.browser.safari) != "undefined")
+		{
+			alert('safari');
+		}else if(typeof($.browser.opera) != "undefined")
+		{
+			alert('opera');
+		}else if(typeof($.browser.msie) != "undefined")
+		{
+			alert('iexplorer');
+		}
+	});
+
 
 *** 
