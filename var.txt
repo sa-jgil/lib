@@ -1762,4 +1762,52 @@ file_size = (file_size/1024).toFixed(0);
 	});
 
 
+*** mantener fijo la barra de menu
+
+ *{margin:0;padding:0}
+	header nav{height:40px;background:#000;width:100%;}
+	header nav ul{display:table;margin:0 auto}
+	header nav ul li{list-style:none;float:left}
+	header nav ul li a:link,
+	header nav ul li a:active,
+	header nav ul li a:visited{line-height:40px;color:#fff;text-decoration:none;padding:0 20px;display:block}
+	
+	.fixed{box-shadow:0 0 10px rgba(0,0,0,0.5);position:fixed;top:0}
+	
+<nav>
+	<ul>
+		<li><a href="#">Soy un enlace</a></li>
+		<li><a href="#">Soy un enlace</a></li>
+		<li><a href="#">Soy un enlace</a></li>
+		<li><a href="#">Soy un enlace</a></li>
+	</ul>
+</nav>
+		
+$(window).scroll(function(){
+	if ($(this).scrollTop() > 50) $('nav').addClass("fixed").fadeIn();
+	else $('nav').removeClass("fixed");
+});
+
+
+
+*** para saber si una cadena esta dentro de otra en php
+$cadena = "";
+$buscar = "";
+$esta = mb_stristr($cadena,$buscar);
+--> $esta devuelve true o flase
+
+*** si el servidor da problemas con allow_url_fopen
+Hoy se me presento un inconveniente en mi hosting, estaba haciendo un proyecto en el cual 
+usaba funciones de lecturas de archivos y url externas, entre las que se encuentra  fopen, 
+peroo lamentablemente mi hosting no tenia configurada la opción allow_url_fopen, buscando 
+en mi cpanel como entrar al php.ini para habilitar esta opción, me di cuenta que no existía 
+en ningún lado. La solución que encontré fue crear el archivo “php.ini” en la carpeta donde 
+estaba mi proyecto y agregarle la linea:
+
+allow_url_fopen=on;
+
+con esta linea, queda habilitada esta opción solamente en la carpeta donde se crea en php.ini.
+
+--> colocar el php.ini dentro de la carpeta donde esta el archivo q esta dando el error.
+
 *** 
