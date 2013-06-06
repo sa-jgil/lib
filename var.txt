@@ -1810,4 +1810,20 @@ con esta linea, queda habilitada esta opción solamente en la carpeta donde se c
 
 --> colocar el php.ini dentro de la carpeta donde esta el archivo q esta dando el error.
 
+*** a roto
+	//--> a roto
+	$('a[href=""]').each(function(){
+		$(this).click(function(e){
+			e.preventDefault();
+		});
+	});
+
+
+*** Bucle para recibir todas las variables por REQUEST en PHP
+
+	foreach($_REQUEST as $nombre_campo => $valor){
+		$asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
+		eval($asignacion);
+	}
+
 *** 
