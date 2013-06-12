@@ -1,0 +1,118 @@
+*** get_template
+	function get_template($id='0') {
+		$file = 'pagina.html';
+		$html = file_get_contents($file);
+		$template = str_replace('{id}', $id, $html);
+		return $template;
+	}
+
+	
+*** cdb.php
+<?php
+/**/
+	$host = "localhost";
+	$user  = "root";
+	$password = "";
+	$db_name = "termica_plataforma_proyectos_publicitarios";
+/**
+	$host = "localhost";
+	$user  = "w1701282_proto";
+	$password = "T3rm1c4123";
+	$db_name = "w1701282_termica_plataforma_proyectos_publicitarios";
+/**/
+
+	$query = NULL;
+	
+	$cdb = mysql_connect($host,$user,$password) or die("Problemas en la conexion...............................");
+	mysql_select_db($db_name,$cdb) or die("Problemas en la seleccion de la base de datos...............................");
+	mysql_set_charset('utf8');
+	
+	function _query($query,$cdb)
+	{
+		mysql_query($query,$cdb) or die("Problemas en el query".mysql_error());
+	}
+	function _closedb($cdb)
+	{
+		mysql_close($cdb);
+	}
+?>
+
+*** consulta multiple con determinados id --> http://localhost/propios/proto2/src/cliente_detalle.php?c=22,23,24,25
+<?php
+	require_once('db/cdb.php');
+	$query = "SELECT * FROM clientes WHERE id_cliente in (".$_REQUEST['c'].") order by nombre;";
+	$reg_clientes = mysql_query($query,$cdb) or die("Problemas en el query".mysql_error());
+	while ($clientes = mysql_fetch_array($reg_clientes, MYSQL_NUM)) {
+?>
+	<section class="clientes">
+		<article class="wrap300">
+			<div class="infoCliente clearfix">
+				<div class="opt">
+					<a class="nproyectos" href="" target="_self">999</a>
+					<a class="modificar" href="./src/cliente_modifica.php?c=<?=$clientes[0]?>" target="_self" ></a>
+					<a class="eliminar" href="eliCli" data-id="<?=$clientes[0]?>" data-ajax="true"></a>
+				</div>
+				<hgroup class="clearfix">
+					<h2><?=str_replace("_"," ",$clientes[1])?></h2>
+					<h3><?=$clientes[2]?></h3>
+					<h4><?=$clientes[3]?></h4>
+					<h5><?=$clientes[4]!=''?'Contacto: '.$clientes[4]:''?></h5>
+					<h6><?=$clientes[5]?></h6>
+				</hgroup>
+			</div>
+		</article>
+	</section>	
+<?php	
+	}
+	_closedb($cdb);
+?>
+
+*** funcion existe campo en base de datos
+	function existe($query_existe,$cdb)
+	{
+		$registros = mysql_query($query_existe, $cdb) or die("Problemas en el query".mysql_error());
+		$existe = (mysql_fetch_array($registros)) ? true : false;
+		return $existe;
+	}
+
+	--> ejemplo
+	$query_existe = "SELECT * FROM clientes WHERE (nombre = '".$nombre."')";
+	if(existe($query_existe,$cdb))
+	{
+		echo 'existe';
+		exit;
+	}
+	
+*** json_encode;
+
+$arr = array('error' => 0, 'id' => 10);
+echo json_encode($arr);
+
+--> tratado en js
+
+	$.post(url,data,function(data){
+		var data = eval('(' + data + ')');
+		alert(data.error+" "+data.id)
+	});
+	
+*** manejo de cadenas
+
+$nombre = str_replace(" ","_",$nombre);
+
+*** switch
+	switch($acc)
+	{
+		case 'add':
+			//....
+		break;
+			//...
+	}
+
+*** recibir $_REQUEST multiples
+
+	foreach($_REQUEST as $nombre_campo => $valor){
+		$asignacion = "\$" . $nombre_campo . "='" . trim($valor) . "';";
+		eval($asignacion);
+	}
+
+*** 
