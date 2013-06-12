@@ -115,4 +115,8 @@ $nombre = str_replace(" ","_",$nombre);
 		eval($asignacion);
 	}
 
+*** devolver id despues de un insert
+	hacer el insert luego
+	$id = mysql_insert_id();
+	
 *** 
