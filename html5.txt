@@ -1,0 +1,8 @@
+//--> lista editable, como para hacer listas
+
+<ul id="lista" contenteditable="true">
+	<li>
+	</li>
+</ul>
+
+//--> 

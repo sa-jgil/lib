@@ -2,3 +2,16 @@
 //--> agregar un elemento con contenido
 $('body').append($('<span>',{text:'hola mundo'}));
 
+
+$('<input>',{
+	type    : 'button',
+	class   : 'clsEliminarContacto',
+	value   : 'Eliminar',
+}).data('contactoAEliminar',strTelefono)
+//por medio del metodo data almacenamos en el boton el numero que debemos eliminar
+//(esto no sera visible, es un truquillo interesante)
+
+
+
+
+
