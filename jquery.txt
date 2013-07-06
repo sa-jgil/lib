@@ -1,0 +1,4 @@
+
+//--> agregar un elemento con contenido
+$('body').append($('<span>',{text:'hola mundo'}));
+
