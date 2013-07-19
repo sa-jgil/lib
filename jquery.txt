@@ -12,6 +12,12 @@ $('<input>',{
 //(esto no sera visible, es un truquillo interesante)
 
 
+//--> disparadores
+un div dispara un input:file
+<script type="text/javascript">
+	$('.archivo').live('click',function(){
+		$("#adjunto").trigger("click");
+	});
+</script>
 
-
-
+//--> 
