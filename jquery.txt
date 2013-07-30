@@ -20,4 +20,10 @@ un div dispara un input:file
 	});
 </script>
 
+//--> Verifica variable definida en javascript
+	if(typeof(src) != "undefined")
+	{
+		//definida
+	}
+
 //--> 
