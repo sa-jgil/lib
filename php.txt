@@ -131,3 +131,10 @@ $nombre = str_replace(" ","_",$nombre);
     $texto = ucfirst($texto)
     ?>
 
+	
+*** string to array
+$texto  = "piece1 piece2 piece3 piece4 piece5 piece6";
+$pieces = explode(" ", $texto);
+echo $pieces[0]; // piece1
+
+*** 
