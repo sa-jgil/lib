@@ -150,4 +150,23 @@ $food = array('fruits' => array('orange', 'banana', 'apple'),
 // Count recursivo
 echo count($food, COUNT_RECURSIVE); // muestra 8
 
+*** longitud de una cadena
+	strlen($cadena);
+
+*** peso de un archivo
+	$ruta = '../../comparte/files/';
+	$file = 'hola.jpg';
+	$peso = round((filesize($ruta.$file))/1024);
+
+*** ancho y alto de un archivo
+	$dex = getimagesize($ruta.$file);
+	$ancho = $dex[0];
+	$alto = $dex[1];
+
+*** extension de un archivo
+	$extension = substr($file,(strripos($file,'.'))+1);
+	
+*** acortar un nombre
+	$nombre = (strlen($nombre)>20) ? substr($nombre,0,20).'...' : $nombre;
+
 *** 
