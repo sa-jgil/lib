@@ -4,4 +4,10 @@ var myString = 'hola como estas hola';
 var first = myString.indexOf("hola"); // 0
 var last = myString.lastIndexOf("hola"); // 16
 
+--> Sustraer una parte de la cadena
+
+var cadena = 'c:\data\ima.jpg';
+var cnom = (cadena.lastIndexOf("\\"))+1; // 8
+cadena = cadena.substring(cnom,cadena.length) // ima.jpg
+
 --> 
