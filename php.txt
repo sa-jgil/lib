@@ -169,4 +169,7 @@ echo count($food, COUNT_RECURSIVE); // muestra 8
 *** acortar un nombre
 	$nombre = (strlen($nombre)>20) ? substr($nombre,0,20).'...' : $nombre;
 
+*** forzar utf8
+header('Content-Type: text/html; charset=UTF-8');
+
 *** 
