@@ -1,0 +1,7 @@
+--> Posicion de un caracter en una cadena
+
+var myString = 'hola como estas hola';
+var first = myString.indexOf("hola"); // 0
+var last = myString.lastIndexOf("hola"); // 16
+
+--> 
