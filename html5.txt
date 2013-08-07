@@ -5,4 +5,6 @@
 	</li>
 </ul>
 
-//--> 
+//--> Redirección con HTML 
+entre <head> y </head>
+poner <META HTTP-EQUIV="Refresh" CONTENT="0; URL=pagina"> //0=tipo pagina=ruta
