@@ -26,4 +26,95 @@ un div dispara un input:file
 		//definida
 	}
 
+//--> custom input file
+
+	<div class="custom_input_file">
+		<input type="file" id="adjunto" name="adjunto" data-required="true" data-tipo="pdf" />
+		<h2>Adjuntar C.V (En formato PDF)</h2>
+		<div class="archivo">...</div>
+	</div>
+
+	
+	#dstoy .custom_input_file {
+		overflow: hidden;
+		position: relative;
+		cursor: pointer;
+		padding-left: 17px;
+	}
+	#dstoy .custom_input_file #adjunto {
+		position: absolute;
+		top: -1000px;
+		left: -1000px;
+	}
+	#dstoy .custom_input_file h2 {
+		line-height: 14px !important;
+		margin: 0 !important; 
+	}
+
+
+	//--> custom input file
+	$("#adjunto").val('');
+	$('.custom_input_file .archivo, .custom_input_file h2').live('click',function(){
+		$("#adjunto").trigger("click");
+	});
+	$(".custom_input_file input:file").change(function(){
+		$(this).parent().find(".archivo").html($(this).val());
+		var cnom = ($(this).val().lastIndexOf("\\"))+1;
+		if(cnom>0)
+		{
+			nom = $(this).val().substring(cnom,$(this).val().length)
+		}else
+		{
+			nom = $(this).val();
+		}
+		$('#nombre').val(nom);
+		var file_size = this.files[0].size;
+		//file_size = (file_size/1024).toFixed(0);
+		//alert(file_size);
+		var msgPeso = "El peso de su archivo debe ser menor a 3mb";
+		var msgDataTipo = "La extensión de su archivo debe ser";
+		var val = $(this).val();
+		data_tipo = $(this).attr('data-tipo');
+		if(data_tipo!=null)
+		{
+			var ext_permitidas = data_tipo.toLowerCase();
+			data_tipo = data_tipo.toLowerCase().split(",");;
+			var valido = false;
+			for (var i = 0; i < data_tipo.length; i++)
+			{
+				var extension = (val.substring(val.lastIndexOf("."))).toLowerCase();
+				extension = extension.replace(".","");
+				if($.trim(data_tipo[i]) == extension)
+				{
+					valido = true;
+					$('#extension').val(extension);
+				}
+			}
+			if(!valido)
+			{
+				mostrarError();
+				$('.msgErrorValidator').html(msgDataTipo+" "+ext_permitidas);
+				error = 1;
+				$(this).val('');
+				$('#nombre').val('');
+				$(this).parent().find(".archivo").html('...');
+				return false;
+			}
+		}
+		if(file_size>3000000)
+		{
+			mostrarError();
+			$('.msgErrorValidator').html(msgPeso);
+			error = 1;
+			$(this).val('');
+			$('#nombre').val('');
+			$(this).parent().find(".archivo").html('...');
+			return false;
+		}
+	}).css('border-width',function(){
+		if(navigator.appName == "Microsoft Internet Explorer")
+			return 0;
+	});
+			
+
 //--> 

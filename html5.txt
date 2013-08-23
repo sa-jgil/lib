@@ -8,3 +8,45 @@
 //--> Redirección con HTML 
 entre <head> y </head>
 poner <META HTTP-EQUIV="Refresh" CONTENT="0; URL=pagina"> //0=tipo pagina=ruta
+
+
+//--> tag video
+
+	<video id="video" width="640" height="320" controls>
+		<source id="vid_mp4" src="video.mp4" type="video/mp4; codecs='avc1,mp4a'">
+		<source id="vid_ogg" src="video.webm" type="video/webm; codecs='vp8,vorbis'">
+		<img src="images/mas_efectivo_mas_rapido/video.png" alt="" />
+	</video>
+
+//--> semantica
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{title}</title>
+		<meta name="description" content="{description}" />
+		<meta name="Author" content="Termica estudio creativo C.A. - info@estudiotermica.com" />
+		<link type="text/css" href="style.css" rel="stylesheet" media="all" />
+	</head>
+	<body>
+		<header>
+			<h1>titulo del sitio</h1>
+		</header>
+		<section>
+			<article>
+				
+			</article>
+			<aside>
+				
+			</aside>
+		</section>
+		<footer>
+			texto pie
+		</footer>
+	</body>
+</html>
+
+
+//-->  mobile
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />

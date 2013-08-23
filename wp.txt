@@ -1,0 +1,33 @@
+Wordpress
+
+--> get_bloginfo()
+
+admin_email          = admin@example.com
+atom_url             = http://www.example.com/home/feed/atom
+charset              = UTF-8
+comments_atom_url    = http://www.example.com/home/comments/feed/atom
+comments_rss2_url    = http://www.example.com/home/comments/feed
+description          = Just another WordPress blog
+home                 = http://www.example.com/home (DEPRECATED! use url option instead)
+html_type            = text/html
+language             = en-US
+name                 = Testpilot
+pingback_url         = http://www.example.com/home/wp/xmlrpc.php
+rdf_url              = http://www.example.com/home/feed/rdf
+rss2_url             = http://www.example.com/home/feed
+rss_url              = http://www.example.com/home/feed/rss
+siteurl              = http://www.example.com/home (DEPRECATED! use url option instead)
+stylesheet_directory = http://www.example.com/home/wp/wp-content/themes/largo
+stylesheet_url       = http://www.example.com/home/wp/wp-content/themes/largo/style.css
+template_directory   = http://www.example.com/home/wp/wp-content/themes/largo
+template_url         = http://www.example.com/home/wp/wp-content/themes/largo
+text_direction       = ltr
+url                  = http://www.example.com/home
+version              = 3.5
+wpurl                = http://www.example.com/home/wp
+
+
+--> info page 
+var_dump($post);
+
+titulo: $post->post_title
