@@ -117,4 +117,53 @@ un div dispara un input:file
 	});
 			
 
-//--> 
+//--> scroll sobre un elemento por ejemplo en una imagen
+
+<div class="padre"><img src="asdd.jpg" alt="" /></div>
+	
+	scrollVertical($('.padre'),$('.padre img'));
+	function scrollVertical($padre,$hijo){
+		$padre.css({
+			overflow: 'hidden'
+		});
+		var extra = 800;
+		var divHeight = $padre.height();
+		$padre.unbind('mousemove').bind('mousemove',function(e){
+			var containerHeight = $hijo.height() + divHeight + 2*extra;
+			var top = (e.pageY - $padre.offset().top) * (containerHeight-divHeight) / divHeight - extra;
+			$padre.animate({scrollTop: top}, 0);
+		});
+	}
+	scrollHorizontal($('.padre'),$('.padre img'));
+	function scrollHorizontal($padre,$hijo){
+		$padre.css({
+			overflow: 'hidden'
+		});
+		var extra = 800;
+		var divWidth = $padre.width();
+		$padre.unbind('mousemove').bind('mousemove',function(e){
+			var containerWidth = $hijo.width() + divWidth + 2*extra;
+			var left = (e.pageX - $padre.offset().left) * (containerWidth-divWidth) / divWidth - extra;
+			$padre.animate({scrollLeft: left}, 0);
+		});
+	}
+	scrollGeneral($('.padre'),$('.padre img'));
+	function scrollGeneral($padre,$hijo){
+		$padre.css({
+			overflow: 'hidden'
+		});
+		var extra = 50;
+		var divWidth = $padre.width();
+		var divHeight = $padre.height();
+		$padre.unbind('mousemove').bind('mousemove',function(e){
+			var containerWidth = $hijo.width() + divWidth + 2*extra;
+			var left = (e.pageX - $padre.offset().left) * (containerWidth-divWidth) / divWidth - extra;
+			$padre.animate({scrollLeft: left}, 0);
+			var containerHeight = $hijo.height() + divHeight + 2*extra;
+			var top = (e.pageY - $padre.offset().top) * (containerHeight-divHeight) / divHeight - extra;
+			$padre.animate({scrollTop: top}, 0);
+		});
+	}
+
+	
+-->

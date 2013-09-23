@@ -10,4 +10,8 @@ var cadena = 'c:\data\ima.jpg';
 var cnom = (cadena.lastIndexOf("\\"))+1; // 8
 cadena = cadena.substring(cnom,cadena.length) // ima.jpg
 
+--> Verificar IE7
+IE='\v'=='v'
+IE devuleve true
+
 --> 

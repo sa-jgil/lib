@@ -14,9 +14,16 @@ poner <META HTTP-EQUIV="Refresh" CONTENT="0; URL=pagina"> //0=tipo pagina=ruta
 
 	<video id="video" width="640" height="320" controls>
 		<source id="vid_mp4" src="video.mp4" type="video/mp4; codecs='avc1,mp4a'">
-		<source id="vid_ogg" src="video.webm" type="video/webm; codecs='vp8,vorbis'">
+		<source id="vid_webm" src="video.webm" type="video/webm; codecs='vp8,vorbis'">
 		<img src="images/mas_efectivo_mas_rapido/video.png" alt="" />
 	</video>
+	
+	<video id="vv" controls>
+		<source id="vid_ogg" src="multimedia/aprende/video_qsdolor.ogg" type="video/ogg">
+		<source id="vid_mp4" src="multimedia/aprende/video_qsdolor.mp4" type="video/mp4">
+		Este video no puede ser reproducido en este navegador!
+	</video>
+	
 
 //--> semantica
 
