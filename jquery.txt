@@ -1,4 +1,3 @@
-
 //--> agregar un elemento con contenido
 $('body').append($('<span>',{text:'hola mundo'}));
 
@@ -166,4 +165,11 @@ un div dispara un input:file
 	}
 
 	
+-->trim
+
+function trim(myString)
+{
+    return myString.replace(/^\s+/g,'').replace(/\s+$/g,'');
+}
+
 -->
