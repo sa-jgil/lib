@@ -14,4 +14,4 @@ cadena = cadena.substring(cnom,cadena.length) // ima.jpg
 IE='\v'=='v'
 IE devuleve true
 
---> 
+--> hola mundo
